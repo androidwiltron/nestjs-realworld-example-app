@@ -101,6 +101,18 @@ make sure the postgres container/db is running (use docker-compose). then run:
 
     cat seed_data.sql |  docker exec -i app_db_1 /bin/bash -c "PGPASSWORD=mysecretpassword psql --username postgres nestjsrealworld"
 
+##### Seeding large ammounts of data
+
+to seed the database with large numbers of articles there is a ts script that utilises typeORM to add 1000's of articles
+
+```
+cd app/tests/seed
+npx ts-node index.ts
+```
+
+##### performance considerations
+
+articles will take a longer time to return when there are millions and have some impact on performance. pagination may be implemented if interacting with the API. a query can be passed to limit the number of articles returned `?limit=100&offset=0` incrementing the offset to bring back results.
 
 ## NPM scripts
 
